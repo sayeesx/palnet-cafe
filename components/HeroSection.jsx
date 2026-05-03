@@ -132,7 +132,7 @@ export function HeroSection() {
           {/* Hummus Crunch Salad */}
           <div className="relative flex min-h-[260px] flex-col overflow-hidden rounded-2xl bg-[#e4efc8] px-4 pt-4 pb-4 sm:min-h-[296px] md:min-h-[380px] md:flex-row md:items-stretch md:gap-5 md:px-6 md:pt-6 md:pb-0 lg:min-h-[420px]">
             <Link
-              href="#menu"
+              href="/menu"
               className="absolute right-3 top-3 z-10 rounded-full border border-olive/15 bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-olive shadow-sm hover:bg-white/95 sm:right-4 sm:top-4 sm:px-3.5 sm:py-1.5 sm:text-[11px] md:right-5 md:top-5 md:text-[12px]"
             >
               Special
@@ -189,12 +189,12 @@ export function HeroSection() {
               </p>
             </div>
             <div className="mt-auto pt-8">
-              <button
-                type="button"
-                className="rounded-full bg-white px-8 py-3 text-xs font-bold uppercase tracking-wide text-olive shadow-sm hover:bg-offwhite sm:text-sm"
+              <Link
+                href="/menu"
+                className="inline-flex rounded-full bg-white px-8 py-3 text-xs font-bold uppercase tracking-wide text-olive shadow-sm transition hover:bg-offwhite sm:text-sm"
               >
-                Order Now
-              </button>
+                View Menu
+              </Link>
             </div>
           </div>
         </Reveal>

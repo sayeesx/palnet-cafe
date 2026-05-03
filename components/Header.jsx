@@ -5,10 +5,10 @@ import Link from "next/link";
 import { useState } from "react";
 
 const NAV = [
-  { href: "#home", label: "HOME" },
-  { href: "#menu", label: "MENU" },
-  { href: "#reviews", label: "REVIEWS" },
-  { href: "#contact", label: "CONTACT" },
+  { href: "/", label: "HOME" },
+  { href: "/menu", label: "MENU" },
+  { href: "/#reviews", label: "REVIEWS" },
+  { href: "/#contact", label: "CONTACT" },
 ];
 
 function HamburgerIcon({ className }) {
@@ -51,7 +51,7 @@ export function Header() {
       <div className="flex h-[52px] w-full items-center justify-between gap-3 rounded-2xl border border-olive/10 bg-white px-3 shadow-sm sm:h-[60px] sm:gap-4 sm:px-5 md:px-6">
         {/* Logo */}
         <Link
-          href="#home"
+          href="/"
           className="flex min-w-0 items-center gap-2.5 sm:gap-3"
         >
           <Image

@@ -5,9 +5,10 @@ const INSTAGRAM = "https://www.instagram.com/planet_cafe_bistro/";
 const NARRS = "https://narrs.shahr.in/";
 
 const MENU_DISHES = [
-  { name: "Hawaiian Salad", href: "#menu" },
-  { name: "Lambi Chicken", href: "#menu" },
-  { name: "Alf med Pasta", href: "#menu" },
+  { name: "Hawaiian Salad", href: "/menu" },
+  { name: "Lambi Chicken", href: "/menu" },
+  { name: "Alf med Pasta", href: "/menu" },
+  { name: "Prawn in Red Sauce", href: "/menu" },
 ];
 
 function InstagramGlyph({ className }) {
@@ -42,34 +43,24 @@ export function Footer() {
       >
         <div className="flex min-h-0 flex-1 flex-col gap-8">
           <div>
-            <h2 className="max-w-xs text-2xl font-bold uppercase leading-[0.95] tracking-tight sm:text-3xl md:max-w-md">
-              SIGN UP FOR OUR
+            <h2 className="max-w-md text-2xl font-bold uppercase leading-[0.95] tracking-tight sm:text-3xl">
+              FROM OUR KITCHEN
               <br />
-              NEWSLETTER
+              TO YOUR FEED
             </h2>
-
-            <form
-              className="mt-5 flex w-full max-w-sm overflow-hidden rounded-md bg-offwhite shadow-inner"
-              aria-label="Newsletter"
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-white/80">
+              Peek at new plates, weekend specials, and the vibe at Planet Cafe
+              Bistro—follow us for the latest.
+            </p>
+            <a
+              href={INSTAGRAM}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex h-11 items-center gap-2 rounded-full border border-white/40 bg-white/10 px-5 text-xs font-bold uppercase tracking-wide text-white transition hover:border-white/60 hover:bg-white/15"
             >
-              <label htmlFor="newsletter" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="newsletter"
-                type="email"
-                placeholder="Register now"
-                className="h-10 min-w-0 flex-1 border-0 bg-transparent px-3 text-sm text-olive placeholder:text-olive/50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-olive/30"
-                autoComplete="email"
-              />
-              <button
-                type="submit"
-                className="flex w-11 shrink-0 items-center justify-center bg-olive text-white transition hover:bg-olive/90"
-                aria-label="Submit newsletter"
-              >
-                →
-              </button>
-            </form>
+              <InstagramGlyph className="h-5 w-5 shrink-0" />
+              Follow on Instagram
+            </a>
           </div>
 
           <nav aria-label="Menu dishes">
@@ -95,9 +86,18 @@ export function Footer() {
       <Reveal
         subtle
         delay={0.06}
-        className="mx-auto mt-auto flex w-full max-w-6xl flex-col items-start justify-between gap-6 border-t border-white/15 pt-8 sm:flex-row sm:items-center sm:pt-10"
+        className="mx-auto mt-auto flex w-full max-w-6xl flex-row flex-wrap items-center justify-between gap-6 border-t border-white/15 pt-8 sm:pt-10"
       >
-        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-1">
+        <a
+          href={INSTAGRAM}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/35 text-white transition hover:border-white/60 hover:bg-white/10"
+          aria-label="Planet Cafe Bistro on Instagram"
+        >
+          <InstagramGlyph className="h-6 w-6" />
+        </a>
+        <div className="flex flex-col gap-2 text-right sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-1">
           <p className="text-xs text-white/55">
             © {new Date().getFullYear()} Planet Cafe Bistro. All rights reserved.
           </p>
@@ -113,15 +113,6 @@ export function Footer() {
             </a>
           </p>
         </div>
-        <a
-          href={INSTAGRAM}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-white/35 text-white transition hover:border-white/60 hover:bg-white/10"
-          aria-label="Planet Cafe Bistro on Instagram"
-        >
-          <InstagramGlyph className="h-6 w-6" />
-        </a>
       </Reveal>
     </footer>
   );

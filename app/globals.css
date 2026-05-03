@@ -14,3 +14,9 @@ html::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Reveal } from "@/components/Reveal";
 
 const IMG = {
   mustTry:
@@ -43,7 +44,7 @@ export function HeroSection() {
     >
       <div className="flex w-full flex-col gap-4 md:flex-row md:items-stretch md:gap-4 lg:gap-5">
         {/* Left Column */}
-        <div className="flex min-h-0 min-w-0 w-full flex-col gap-4 md:flex-1 md:basis-0">
+        <Reveal delay={0} className="flex min-h-0 min-w-0 w-full flex-col gap-4 md:flex-1 md:basis-0">
           {/* Customer Favorite — Large */}
           <div className="relative aspect-[1/1] w-full min-h-[220px] flex-1 overflow-hidden rounded-2xl bg-black sm:min-h-[260px] md:aspect-auto md:min-h-[min(26vh,220px)] lg:min-h-[min(28vh,240px)]">
             <video
@@ -52,7 +53,8 @@ export function HeroSection() {
               muted
               playsInline
               poster="https://res.cloudinary.com/dhh2nd2bg/image/upload/v1777798004/hero-poster_rd7bma.jpg"
-              preload="metadata"
+              preload="auto"
+              fetchPriority="high"
               className="absolute inset-0 h-full w-full object-cover"
               style={{ backgroundColor: 'black' }}
             >
@@ -123,10 +125,10 @@ export function HeroSection() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
 
         {/* Right Column */}
-        <div className="flex min-h-0 min-w-0 w-full flex-col gap-4 md:basis-0 md:flex-1 lg:max-w-none">
+        <Reveal delay={0.06} className="flex min-h-0 min-w-0 w-full flex-col gap-4 md:basis-0 md:flex-1 lg:max-w-none">
           {/* Hummus Crunch Salad */}
           <div className="relative flex min-h-[260px] flex-col overflow-hidden rounded-2xl bg-[#e4efc8] px-4 pt-4 pb-4 sm:min-h-[296px] md:min-h-[380px] md:flex-row md:items-stretch md:gap-5 md:px-6 md:pt-6 md:pb-0 lg:min-h-[420px]">
             <Link
@@ -151,7 +153,7 @@ export function HeroSection() {
               <img
                 src={IMG.mexicanJackSalad}
                 alt="Mexican Jack Salad bowl"
-                className="absolute inset-0 h-full w-full object-contain object-[100%_100%] md:hidden"
+                className="absolute inset-0 h-full w-full max-md:translate-y-5 object-contain object-[100%_100%] md:hidden"
                 loading="lazy"
               />
               {/* Desktop: Next.js Image */}
@@ -195,7 +197,7 @@ export function HeroSection() {
               </button>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

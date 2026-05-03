@@ -1,30 +1,31 @@
-import Image from "next/image";
 import Link from "next/link";
+import { Reveal } from "@/components/Reveal";
 
-const COLS = [
-  {
-    title: "MENU",
-    links: ["View Menu", "Combo", "Healthy Foods", "Dishes"],
-  },
-  {
-    title: "SERVICE",
-    links: ["Order Tracking", "FAQs", "Return & Refunds"],
-  },
-  {
-    title: "ABOUT",
-    links: ["About Us", "Privacy & Policy", "Our Chefs", "Terms & Privacy"],
-  },
+const INSTAGRAM = "https://www.instagram.com/planet_cafe_bistro/";
+const NARRS = "https://narrs.shahr.in/";
+
+const MENU_DISHES = [
+  { name: "Hawaiian Salad", href: "#menu" },
+  { name: "Lambi Chicken", href: "#menu" },
+  { name: "Alf med Pasta", href: "#menu" },
 ];
 
-function SocialIcon({ children, label }) {
+function InstagramGlyph({ className }) {
   return (
-    <a
-      href="#"
-      aria-label={label}
-      className="flex h-7 w-7 items-center justify-center rounded-full border border-white/30 text-[10px] text-white hover:bg-white/10"
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
     >
-      {children}
-    </a>
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none" />
+    </svg>
   );
 }
 
@@ -32,85 +33,96 @@ export function Footer() {
   return (
     <footer
       id="contact"
-      className="mt-[70px] min-h-[210px] w-full bg-olive px-[18px] pb-6 pt-[22px] text-white"
+      className="mt-auto flex min-h-0 w-full flex-1 flex-col overflow-hidden rounded-t-2xl bg-olive px-4 pb-8 pt-10 text-white sm:rounded-t-3xl sm:px-6 sm:pb-10 sm:pt-12 md:px-8 md:pb-12 md:pt-14"
     >
-      <div className="flex flex-col gap-8 lg:flex-row lg:justify-between lg:gap-10">
-        <div className="w-full lg:w-[58%]">
-          <h2 className="max-w-[280px] text-[30px] font-bold uppercase leading-[0.95]">
-            SIGN UP FOR OUR
-            <br />
-            NEWSLETTER
-          </h2>
+      <Reveal
+        subtle
+        delay={0}
+        className="flex w-full max-w-6xl flex-1 flex-col gap-10 lg:mx-auto"
+      >
+        <div className="flex min-h-0 flex-1 flex-col gap-8">
+          <div>
+            <h2 className="max-w-xs text-2xl font-bold uppercase leading-[0.95] tracking-tight sm:text-3xl md:max-w-md">
+              SIGN UP FOR OUR
+              <br />
+              NEWSLETTER
+            </h2>
 
-          <form
-            className="mt-4 flex w-[240px] max-w-full overflow-hidden rounded-[4px] bg-offwhite shadow-inner"
-            aria-label="Newsletter"
-          >
-            <label htmlFor="newsletter" className="sr-only">
-              Register now
-            </label>
-            <input
-              id="newsletter"
-              type="email"
-              placeholder="Register now"
-              className="h-[30px] min-w-0 flex-1 border-0 bg-transparent px-2 text-[7px] text-olive placeholder:text-olive/50 focus:outline-none"
-              autoComplete="email"
-            />
-            <button
-              type="button"
-              className="flex w-8 shrink-0 items-center justify-center bg-olive text-white hover:bg-olive/90"
-              aria-label="Submit"
+            <form
+              className="mt-5 flex w-full max-w-sm overflow-hidden rounded-md bg-offwhite shadow-inner"
+              aria-label="Newsletter"
             >
-              →
-            </button>
-          </form>
-
-          <div className="mt-8 grid grid-cols-3 gap-4">
-            {COLS.map((col) => (
-              <div key={col.title}>
-                <p className="text-[7px] font-bold uppercase tracking-widest">
-                  {col.title}
-                </p>
-                <ul className="mt-2 space-y-1">
-                  {col.links.map((l) => (
-                    <li key={l}>
-                      <Link
-                        href="#"
-                        className="text-[6px] text-white/75 hover:text-white"
-                      >
-                        {l}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+              <label htmlFor="newsletter" className="sr-only">
+                Email address
+              </label>
+              <input
+                id="newsletter"
+                type="email"
+                placeholder="Register now"
+                className="h-10 min-w-0 flex-1 border-0 bg-transparent px-3 text-sm text-olive placeholder:text-olive/50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-olive/30"
+                autoComplete="email"
+              />
+              <button
+                type="submit"
+                className="flex w-11 shrink-0 items-center justify-center bg-olive text-white transition hover:bg-olive/90"
+                aria-label="Submit newsletter"
+              >
+                →
+              </button>
+            </form>
           </div>
-        </div>
 
-        <div className="flex w-full justify-center lg:w-[42%] lg:justify-end">
-          <div className="relative h-[130px] w-[195px] max-w-full overflow-hidden rounded-[4px]">
-            <Image
-              src="/images/footer-pizza.jpg"
-              alt=""
-              fill
-              className="object-cover"
-              sizes="195px"
-            />
-          </div>
+          <nav aria-label="Menu dishes">
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/90">
+              Menu
+            </p>
+            <ul className="mt-3 flex flex-col gap-2 sm:gap-2.5">
+              {MENU_DISHES.map(({ name, href }) => (
+                <li key={name}>
+                  <Link
+                    href={href}
+                    className="inline-block text-sm font-medium text-white/85 transition hover:text-white"
+                  >
+                    {name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
-      </div>
+      </Reveal>
 
-      <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
-        <p className="text-[6px] text-white/60">
-          © {new Date().getFullYear()} Planet Cafe Bistro. All rights reserved.
-        </p>
-        <div className="flex gap-2 self-end sm:self-auto">
-          <SocialIcon label="Instagram">IG</SocialIcon>
-          <SocialIcon label="Facebook">f</SocialIcon>
-          <SocialIcon label="Twitter">𝕏</SocialIcon>
+      <Reveal
+        subtle
+        delay={0.06}
+        className="mx-auto mt-auto flex w-full max-w-6xl flex-col items-start justify-between gap-6 border-t border-white/15 pt-8 sm:flex-row sm:items-center sm:pt-10"
+      >
+        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-1">
+          <p className="text-xs text-white/55">
+            © {new Date().getFullYear()} Planet Cafe Bistro. All rights reserved.
+          </p>
+          <p className="text-xs text-white/55">
+            Developed by{" "}
+            <a
+              href={NARRS}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-white/85 underline decoration-white/30 underline-offset-2 transition hover:text-white hover:decoration-white/60"
+            >
+              narrs
+            </a>
+          </p>
         </div>
-      </div>
+        <a
+          href={INSTAGRAM}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-white/35 text-white transition hover:border-white/60 hover:bg-white/10"
+          aria-label="Planet Cafe Bistro on Instagram"
+        >
+          <InstagramGlyph className="h-6 w-6" />
+        </a>
+      </Reveal>
     </footer>
   );
 }

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function ProductCard({ name, price, imageSrc, imageAlt }) {
   return (
-    <article className="flex h-full min-h-0 w-full flex-col rounded-xl border border-olive/20 bg-white/90 p-3 shadow-sm">
+    <article className="flex h-full min-h-0 w-full flex-col rounded-xl border border-olive/20 bg-white/90 p-2 shadow-sm sm:p-3">
       <div className="relative aspect-square w-full shrink-0 overflow-hidden rounded-lg">
         <Image
           src={imageSrc}
@@ -13,23 +13,25 @@ export function ProductCard({ name, price, imageSrc, imageAlt }) {
         />
       </div>
 
-      <div className="mt-3 flex min-h-[2.75rem] items-start justify-between gap-2">
-        <span className="line-clamp-2 flex-1 text-xs font-semibold leading-snug text-olive">
+      <div className="mt-2 flex min-h-[2.5rem] items-start justify-between gap-1.5 max-sm:min-h-[2.25rem] sm:mt-3 sm:min-h-[2.75rem] sm:gap-2">
+        <span className="line-clamp-2 flex-1 text-[11px] font-semibold leading-snug text-olive max-sm:text-[10px] sm:text-xs">
           {name}
         </span>
-        <span className="shrink-0 pt-0.5 text-xs font-bold text-olive">{price}</span>
+        <span className="shrink-0 pt-0.5 text-[11px] font-bold text-olive max-sm:text-[10px] sm:text-xs">
+          {price}
+        </span>
       </div>
 
-      <div className="mt-auto flex flex-col gap-2 pt-3">
+      <div className="mt-auto flex flex-col gap-1.5 pt-2 max-sm:gap-1.5 max-sm:pt-2 sm:gap-2 sm:pt-3">
         <button
           type="button"
-          className="h-10 w-full shrink-0 rounded-md border border-olive/40 bg-offwhite text-xs font-bold uppercase tracking-wide text-olive hover:bg-white"
+          className="h-9 w-full shrink-0 rounded-md border border-olive/40 bg-offwhite text-[10px] font-bold uppercase tracking-wide text-olive hover:bg-white max-sm:h-8 max-sm:text-[9px] sm:h-10 sm:text-xs"
         >
           Add To Cart
         </button>
         <button
           type="button"
-          className="h-10 w-full shrink-0 rounded-md bg-olive text-xs font-bold uppercase tracking-wide text-white hover:bg-olive/90"
+          className="h-9 w-full shrink-0 rounded-md bg-olive text-[10px] font-bold uppercase tracking-wide text-white hover:bg-olive/90 max-sm:h-8 max-sm:text-[9px] sm:h-10 sm:text-xs"
         >
           Buy It Now
         </button>

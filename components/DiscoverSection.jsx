@@ -1,47 +1,26 @@
 import Image from "next/image";
+import { Reveal } from "@/components/Reveal";
 
-const TAGS = [
-  "FLAVOR NOTES",
-  "BEHIND THE SCENES",
-  "FRESH EVERY DAY",
-  "PORTION LOVE",
-  "SOURCED RIGHT",
-  "SPICE LEVELS",
-  "LITTLE FOOD JOYS",
-  "MOOD FOR FOOD",
+const LOCATIONS = [
+  "Perinthalmnna",
+  "Malappuram",
+  "Manjeri",
+  "Edappal",
+  "Kottakkal",
 ];
 
 export function DiscoverSection() {
   return (
-    <section className="mt-[75px] w-full" aria-labelledby="discover-title">
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-        <div className="flex flex-col gap-3">
-          <div className="relative h-[250px] w-[245px] max-w-full overflow-hidden rounded-[6px]">
-            <Image
-              src="/images/lifestyle-table.jpg"
-              alt="Table with food"
-              fill
-              className="object-cover"
-              sizes="245px"
-            />
-          </div>
-          <div className="grid w-[245px] max-w-full grid-cols-2 gap-2">
-            {TAGS.map((t) => (
-              <button
-                key={t}
-                type="button"
-                className="flex h-[24px] items-center justify-center rounded-[2px] border border-mustard bg-offwhite px-1 text-[6px] font-bold uppercase leading-tight text-olive hover:bg-mustard/15"
-              >
-                {t}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex flex-col lg:pl-2">
+    <section className="w-full" aria-labelledby="discover-title">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-x-10 md:gap-y-8 lg:gap-x-14">
+        <Reveal
+          subtle
+          delay={0}
+          className="order-1 self-start md:order-none md:col-start-2 md:row-start-1"
+        >
           <h2
             id="discover-title"
-            className="mt-[30px] text-[30px] font-bold uppercase leading-[0.95] text-olive lg:mt-0"
+            className="text-[clamp(1.65rem,3.8vw,2.35rem)] font-bold uppercase leading-[0.95] tracking-tight text-olive"
           >
             DISCOVER MORE
             <br />
@@ -49,16 +28,38 @@ export function DiscoverSection() {
             <br />
             MORE TO LOVE!
           </h2>
-          <div className="relative mt-6 h-[220px] w-[235px] max-w-full overflow-hidden rounded-[6px]">
-            <Image
-              src="/images/dining-people.jpg"
-              alt="Dining together"
-              fill
-              className="object-cover"
-              sizes="235px"
-            />
-          </div>
-        </div>
+        </Reveal>
+
+        <Reveal
+          subtle
+          delay={0.05}
+          className="relative order-2 flex min-h-[220px] w-full items-center justify-center overflow-hidden rounded-xl bg-offwhite sm:min-h-[280px] md:order-none md:col-start-1 md:row-start-1 md:min-h-[min(52vh,420px)]"
+        >
+          <Image
+            src="/exterior.webp"
+            alt="Planet Cafe exterior"
+            width={1200}
+            height={900}
+            className="h-auto max-h-[min(56vh,520px)] w-full object-contain object-center md:max-h-[min(60vh,560px)]"
+            sizes="(max-width: 768px) 100vw, 560px"
+          />
+        </Reveal>
+
+        <Reveal
+          subtle
+          delay={0.1}
+          className="order-3 grid w-full max-w-full grid-cols-2 gap-2 sm:gap-2.5 md:col-span-2 md:row-start-2 md:max-w-none"
+        >
+          {LOCATIONS.map((t) => (
+            <button
+              key={t}
+              type="button"
+              className="flex min-h-[40px] items-center justify-center rounded-lg border border-mustard/80 bg-mustard/25 px-2 py-2 text-center text-[10px] font-semibold leading-snug tracking-wide text-olive transition hover:bg-mustard/40 sm:text-[11px] md:min-h-[44px] md:text-xs"
+            >
+              {t}
+            </button>
+          ))}
+        </Reveal>
       </div>
     </section>
   );

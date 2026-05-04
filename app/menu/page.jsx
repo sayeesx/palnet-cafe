@@ -1,7 +1,7 @@
-import Link from "next/link";
+import { Suspense } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { ProductCard } from "@/components/ProductCard";
+import { MenuExploreClient } from "@/components/MenuExploreClient";
 import { PRODUCTS } from "@/data/menuProducts";
 
 export const metadata = {
@@ -15,37 +15,30 @@ export default function MenuPage() {
     <div className="flex min-h-[100dvh] min-h-screen w-full max-w-none min-w-0 flex-col px-3 pt-3 sm:px-4 sm:pt-4 md:px-5 md:pt-5">
       <Header />
 
-      <main className="mt-8 w-full min-w-0 pb-16 md:mt-12">
-        <div className="mx-auto max-w-5xl">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-olive/70">
-            Planet Cafe Bistro
-          </p>
-          <h1 className="mt-2 text-[clamp(1.75rem,4vw,2.5rem)] font-bold uppercase leading-[0.95] tracking-tight text-olive">
-            Our menu
-          </h1>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-olive/85 sm:text-[15px]">
-            Highlights from our kitchen—visit us for the full selection and daily specials.
-          </p>
-
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-2 lg:gap-6 xl:grid-cols-2">
-            {PRODUCTS.map((item) => (
-              <ProductCard key={item.name} {...item} />
-            ))}
+      <main className="mt-6 w-full min-w-0 pb-16 md:mt-8">
+        <div className="mx-auto max-w-lg md:max-w-2xl">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-olive/70">
+              Planet Cafe Bistro
+            </p>
+            <h1 className="mt-1 text-[clamp(1.65rem,4vw,2.15rem)] font-bold uppercase leading-[0.95] tracking-tight text-olive">
+              Menu
+            </h1>
+            <p className="mt-2 max-w-md text-sm leading-relaxed text-olive/85">
+              Tap a dish for ingredients-style details—visit us for the full board and daily specials.
+            </p>
           </div>
 
-          <div className="mt-12 flex flex-wrap items-center gap-4">
-            <Link
-              href="/"
-              className="inline-flex h-11 items-center justify-center rounded-full border border-olive/30 bg-offwhite px-6 text-xs font-bold uppercase tracking-wide text-olive transition hover:bg-white"
+          <div className="mt-6">
+            <Suspense
+              fallback={
+                <div className="animate-pulse rounded-2xl border border-olive/10 bg-white/80 py-16 text-center text-sm text-olive/50">
+                  Loading menu…
+                </div>
+              }
             >
-              ← Back home
-            </Link>
-            <Link
-              href="/#contact"
-              className="inline-flex h-11 items-center justify-center rounded-full bg-olive px-6 text-xs font-bold uppercase tracking-wide text-white transition hover:bg-olive/90"
-            >
-              Contact us
-            </Link>
+              <MenuExploreClient products={PRODUCTS} />
+            </Suspense>
           </div>
         </div>
       </main>

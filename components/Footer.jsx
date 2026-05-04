@@ -50,17 +50,8 @@ export function Footer() {
             </h2>
             <p className="mt-3 max-w-md text-sm leading-relaxed text-white/80">
               Peek at new plates, weekend specials, and the vibe at Planet Cafe
-              Bistro—follow us for the latest.
+              Bistro.
             </p>
-            <a
-              href={INSTAGRAM}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-5 inline-flex h-11 items-center gap-2 rounded-full border border-white/40 bg-white/10 px-5 text-xs font-bold uppercase tracking-wide text-white transition hover:border-white/60 hover:bg-white/15"
-            >
-              <InstagramGlyph className="h-5 w-5 shrink-0" />
-              Follow on Instagram
-            </a>
           </div>
 
           <nav aria-label="Menu dishes">

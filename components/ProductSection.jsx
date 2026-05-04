@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ProductCard } from "@/components/ProductCard";
 import { Reveal } from "@/components/Reveal";
-import { PRODUCTS } from "@/data/menuProducts";
+import { HOME_TASTE_STRIP_DISHES } from "@/data/menuProducts";
 
 export function ProductSection() {
   return (
@@ -26,7 +26,7 @@ export function ProductSection() {
         <div
           className="box-border flex min-h-0 w-full min-w-0 flex-nowrap justify-start gap-3 overflow-x-auto overflow-y-visible px-3 pb-4 overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:justify-center md:gap-4 md:overflow-visible md:px-0 md:pb-4 lg:gap-6"
         >
-          {PRODUCTS.map((p, i) => (
+          {HOME_TASTE_STRIP_DISHES.map((p, i) => (
             <Reveal
               key={p.name}
               subtle

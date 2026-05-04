@@ -148,22 +148,22 @@ export function HeroSection() {
                 Fresh,<br className="sm:hidden" /> and boldly layered.<br className="sm:hidden" /> Our Mexican Jack<br className="sm:hidden" /> Salad—a vibrant<br className="sm:hidden" /> crunch of texture<br className="sm:hidden" /> and flavor.
               </p>
             </div>
-            <div className="relative ml-auto -mt-40 -mr-4 h-[220px] w-[200px] shrink-0 rounded-2xl sm:mt-0 sm:h-[270px] sm:w-[240px] md:mx-0 md:mb-0 md:ml-auto md:mr-0 md:mt-0 md:-mr-6 md:aspect-auto md:h-full md:min-h-[260px] md:max-h-none md:max-w-[min(52%,340px)] md:w-[52%] md:self-stretch md:rounded-xl lg:max-w-[min(50%,380px)]">
-              {/* Mobile: plain img to avoid fill quirks */}
+            <div className="relative ml-auto -mt-40 -mr-4 h-[220px] w-[200px] shrink-0 rounded-2xl sm:mt-0 sm:h-[270px] sm:w-[240px] md:mx-0 md:mb-0 md:ml-auto md:mr-0 md:mt-0 md:aspect-auto md:h-full md:min-h-[260px] md:max-h-none md:max-w-[min(58%,400px)] md:w-[58%] md:translate-x-4 md:self-stretch md:rounded-xl lg:max-w-[min(60%,440px)] lg:w-[60%] lg:translate-x-7 xl:translate-x-10">
+              {/* Mobile: unchanged layout */}
               <img
                 src={IMG.mexicanJackSalad}
                 alt="Mexican Jack Salad bowl"
                 className="absolute inset-0 h-full w-full max-md:translate-y-5 object-contain object-[100%_100%] md:hidden"
                 loading="lazy"
               />
-              {/* Desktop: Next.js Image */}
+              {/* Desktop: pin visual to the right edge of the card (horizontal only) */}
               <div className="hidden md:absolute md:inset-0 md:block">
                 <Image
                   src={IMG.mexicanJackSalad}
                   alt="Mexican Jack Salad bowl"
                   fill
-                  className="object-contain object-[100%_100%]"
-                  sizes="(min-width: 1024px) 380px, (min-width: 768px) 320px, 236px"
+                  className="object-contain object-right object-bottom"
+                  sizes="(min-width: 1024px) 400px, (min-width: 768px) 340px, 236px"
                 />
               </div>
             </div>
@@ -174,13 +174,13 @@ export function HeroSection() {
             <span className="inline-block w-fit rounded-full border border-white/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-white sm:text-[11px]">
               Best Food Forever
             </span>
-            <button
-              type="button"
+            <Link
+              href="/menu"
               className="absolute right-4 top-4"
-              aria-label="Open offer"
+              aria-label="View full menu"
             >
               <ArrowCircle />
-            </button>
+            </Link>
             <div className="mt-6 pr-14">
               <p className="text-[31px] font-bold uppercase leading-[0.95] text-white">
                 Food Lover&apos;s

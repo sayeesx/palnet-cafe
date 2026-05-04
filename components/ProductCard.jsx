@@ -1,15 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export function ProductCard({ name, price, imageSrc, imageAlt, viewMenuOnly = false }) {
+export function ProductCard({
+  name,
+  price,
+  imageSrc,
+  imageAlt,
+  slug,
+  viewMenuOnly = false,
+}) {
   return (
     <article className="flex h-full min-h-0 w-full flex-col rounded-xl border border-olive/20 bg-white/90 p-2 shadow-sm sm:p-3">
-      <div className="relative aspect-square w-full shrink-0 overflow-hidden rounded-lg">
+      <div className="relative aspect-square w-full shrink-0 overflow-hidden rounded-lg bg-offwhite">
         <Image
           src={imageSrc}
           alt={imageAlt}
           fill
-          className="object-cover"
+          className="object-contain object-center p-1 sm:p-1.5"
           sizes="(max-width: 767px) 45vw, 25vw"
         />
       </div>
@@ -26,7 +33,7 @@ export function ProductCard({ name, price, imageSrc, imageAlt, viewMenuOnly = fa
       <div className="mt-auto flex flex-col gap-1.5 pt-2 max-sm:gap-1.5 max-sm:pt-2 sm:gap-2 sm:pt-3">
         {viewMenuOnly ? (
           <Link
-            href="/menu"
+            href={slug ? `/menu?dish=${slug}` : "/menu"}
             className="flex h-9 w-full shrink-0 items-center justify-center rounded-md bg-olive text-center text-[10px] font-bold uppercase tracking-wide text-white transition hover:bg-olive/90 max-sm:h-8 max-sm:text-[9px] sm:h-10 sm:text-xs"
           >
             View Menu

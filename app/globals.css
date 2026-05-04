@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  /* Scrollable region without visible scrollbar (keyboard / touch / wheel still work) */
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+}
+
 /* Arimo (Google Fonts) — root font for all text */
 
 /* Hide the main vertical scrollbar while keeping scroll behavior */
@@ -18,5 +31,14 @@ html::-webkit-scrollbar {
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+}
+
+/* Slightly “gluey” scroll feel on phones (does not affect desktop layout) */
+@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+  @supports (-webkit-overflow-scrolling: touch) {
+    html {
+      -webkit-overflow-scrolling: touch;
+    }
   }
 }

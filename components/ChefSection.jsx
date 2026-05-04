@@ -56,23 +56,23 @@ export function ChefSection() {
             Behind every recipe and every welcome at Planet Cafe Bistro is a vision
             for honest food and community—built plate by plate.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-2">
             <Link
               href={FOUNDER_INSTAGRAM}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-11 items-center gap-2 rounded-full border border-olive/35 bg-white/80 px-4 text-xs font-bold uppercase tracking-wide text-olive transition hover:bg-white"
+              className="inline-flex h-8 items-center gap-1.5 rounded-full border border-olive/35 bg-white/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-olive transition hover:bg-white sm:h-8 sm:px-3"
             >
-              <InstagramGlyph className="h-5 w-5 shrink-0" />
+              <InstagramGlyph className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
               Instagram
             </Link>
             <Link
               href={FOUNDER_FACEBOOK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-11 items-center gap-2 rounded-full border border-olive/35 bg-white/80 px-4 text-xs font-bold uppercase tracking-wide text-olive transition hover:bg-white"
+              className="inline-flex h-8 items-center gap-1.5 rounded-full border border-olive/35 bg-white/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-olive transition hover:bg-white sm:h-8 sm:px-3"
             >
-              <FacebookGlyph className="h-5 w-5 shrink-0" />
+              <FacebookGlyph className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
               Facebook
             </Link>
           </div>
@@ -81,7 +81,7 @@ export function ChefSection() {
         <Reveal
           subtle
           delay={0.07}
-          className="mx-auto flex w-full max-w-[200px] shrink-0 justify-center sm:max-w-[220px] md:mx-0 md:ml-auto md:max-w-[260px] lg:max-w-[280px]"
+          className="mx-auto flex w-full max-w-[min(96vw,400px)] shrink-0 justify-center sm:max-w-[min(94vw,420px)] md:mx-0 md:ml-auto md:max-w-[min(100%,340px)] lg:max-w-[min(100%,400px)] xl:max-w-[min(100%,440px)]"
         >
           <Image
             src="/chef.webp"
@@ -89,7 +89,7 @@ export function ChefSection() {
             width={720}
             height={900}
             className="h-auto w-full rounded-xl object-contain"
-            sizes="(max-width: 768px) 200px, 280px"
+            sizes="(max-width: 767px) 400px, (max-width: 1023px) 340px, (max-width: 1279px) 400px, 440px"
           />
         </Reveal>
       </div>

@@ -12,18 +12,18 @@ export function ImageWithShimmer({
   fill,
   width,
   height,
-  onLoadingComplete,
+  onLoad,
   loading,
   ...rest
 }) {
   const [loaded, setLoaded] = useState(false);
 
-  const handleLoadingComplete = useCallback(
+  const handleLoad = useCallback(
     (img) => {
       setLoaded(true);
-      onLoadingComplete?.(img);
+      onLoad?.(img);
     },
-    [onLoadingComplete]
+    [onLoad]
   );
 
   const isEager = loading === "eager";
@@ -51,7 +51,7 @@ export function ImageWithShimmer({
           loading={loading}
           decoding="async"
           className={[className, fade, opacity, "z-[2]"].filter(Boolean).join(" ")}
-          onLoadingComplete={handleLoadingComplete}
+          onLoad={handleLoad}
           {...rest}
         />
       </>
@@ -78,7 +78,7 @@ export function ImageWithShimmer({
         ]
           .filter(Boolean)
           .join(" ")}
-        onLoadingComplete={handleLoadingComplete}
+        onLoad={handleLoad}
         {...rest}
       />
     </div>

@@ -50,7 +50,7 @@ function desktopNavLinkClass(active) {
     "relative whitespace-nowrap py-2 text-sm font-semibold tracking-tight transition-colors",
     active
       ? "text-olive after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:rounded-full after:bg-olive"
-      : "text-olive/65 hover:text-olive",
+      : "text-olive hover:text-olive",
   ].join(" ");
 }
 
@@ -58,7 +58,7 @@ function desktopNavLinkClass(active) {
 function mobileNavLinkClass(active) {
   return [
     "block w-full rounded-lg px-1 py-3 text-left text-[15px] font-semibold tracking-tight transition-colors sm:py-3.5 sm:text-base",
-    active ? "bg-olive/[0.08] text-olive" : "text-olive/80 active:bg-olive/[0.06]",
+    active ? "bg-olive/[0.08] text-olive" : "text-olive active:bg-olive/[0.06]",
   ].join(" ");
 }
 

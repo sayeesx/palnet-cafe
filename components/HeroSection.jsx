@@ -166,7 +166,7 @@ export function HeroSection() {
                     priority
                     loading="eager"
                     fetchPriority="high"
-                    className="object-contain object-right max-md:translate-x-12 max-md:-translate-y-4 sm:max-md:translate-x-14 sm:max-md:-translate-y-5"
+                    className="object-contain object-right max-md:translate-x-12 max-md:-translate-y-16 max-md:-mt-4 sm:max-md:translate-x-14 sm:max-md:-translate-y-18 sm:max-md:-mt-6"
                     sizes="(max-width: 767px) 280px, 240px"
                   />
                 </div>

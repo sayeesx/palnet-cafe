@@ -120,18 +120,20 @@ export function MenuExploreClient({ products }) {
 
       {/* Mobile: unchanged horizontal card list */}
       <div className="mt-6 flex flex-col gap-4 sm:gap-5 md:hidden">
-        {filtered.map((item) => (
+        {filtered.map((item, index) => (
           <article
             key={item.slug}
 className="flex gap-3 overflow-hidden rounded-2xl border border-olive/10 bg-white p-2 shadow-sm ring-1 ring-black/[0.03] transition hover:shadow-md sm:gap-4 sm:p-4"
           >
-            <div className="relative h-[88px] w-[88px] shrink-0 overflow-hidden rounded-xl bg-offwhite sm:h-[112px] sm:w-[112px]">
+            <div className="relative h-[100px] w-[96px] shrink-0 overflow-hidden rounded-xl bg-offwhite sm:h-[112px] sm:w-[112px]">
               <ImageWithShimmer
                 src={item.imageSrc}
                 alt={item.imageAlt}
                 fill
-                className="object-cover scale-[0.85]"
+                className="object-contain scale-[0.9]"
                 sizes="112px"
+                loading="eager"
+                priority={index < 4}
               />
             </div>
             <div className="flex min-w-0 flex-1 flex-col justify-between py-0.5">

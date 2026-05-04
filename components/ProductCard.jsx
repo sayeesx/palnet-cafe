@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { ImageWithShimmer } from "@/components/ImageWithShimmer";
 
 export function ProductCard({
   name,
@@ -8,14 +8,17 @@ export function ProductCard({
   imageAlt,
   slug,
   viewMenuOnly = false,
+  priority = false,
 }) {
   return (
     <article className="flex h-full min-h-0 w-full flex-col rounded-xl border border-olive/20 bg-white/90 p-2 shadow-sm sm:p-3">
       <div className="relative aspect-square w-full shrink-0 overflow-hidden rounded-lg bg-offwhite">
-        <Image
+        <ImageWithShimmer
           src={imageSrc}
           alt={imageAlt}
           fill
+          priority={priority}
+          loading={priority ? "eager" : "lazy"}
           className="object-contain object-center p-1 sm:p-1.5"
           sizes="(max-width: 767px) 45vw, 25vw"
         />

@@ -33,7 +33,7 @@ export function ProductSection() {
               delay={i * 0.055}
               className="flex h-full w-[200px] shrink-0 md:w-auto md:min-w-0 md:flex-1 md:basis-0"
             >
-              <ProductCard {...p} viewMenuOnly />
+              <ProductCard {...p} viewMenuOnly priority={i < 2} />
             </Reveal>
           ))}
         </div>

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 
 const INSTAGRAM = "https://www.instagram.com/planet_cafe_bistro/";
-const NARRS = "https://narrs.shahr.in/";
+const NARRS = "https://narrs.in/";
 
 const MENU_DISHES = [
   { name: "Hawaiian Salad", href: "/menu" },

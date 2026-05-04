@@ -1,4 +1,3 @@
-import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
 import { ProductSection } from "@/components/ProductSection";
 import { ChefSection } from "@/components/ChefSection";
@@ -8,9 +7,7 @@ import { FadeIn } from "@/components/FadeIn";
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-[100dvh] min-h-screen w-full max-w-none min-w-0 flex-col px-3 pt-3 sm:px-4 sm:pt-4 md:px-5 md:pt-5">
-      <Header />
-
+    <div className="flex min-h-0 w-full min-w-0 flex-1 flex-col">
       {/* Hero: no FadeIn — avoids opacity-0 gate so content shows immediately */}
       <div className="mt-4 md:mt-10">
         <HeroSection />

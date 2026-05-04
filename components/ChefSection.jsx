@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { ImageWithShimmer } from "@/components/ImageWithShimmer";
 import { Reveal } from "@/components/Reveal";
 
 const FOUNDER_INSTAGRAM = "https://www.instagram.com/mohamed_shabeel/";
@@ -83,7 +83,7 @@ export function ChefSection() {
           delay={0.07}
           className="mx-auto flex w-full max-w-[min(96vw,400px)] shrink-0 justify-center sm:max-w-[min(94vw,420px)] md:mx-0 md:ml-auto md:max-w-[min(100%,340px)] lg:max-w-[min(100%,400px)] xl:max-w-[min(100%,440px)]"
         >
-          <Image
+          <ImageWithShimmer
             src="/chef.webp"
             alt="Mohammed Shabeel, founder of Planet Café"
             width={720}

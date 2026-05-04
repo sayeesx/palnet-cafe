@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { ImageWithShimmer } from "@/components/ImageWithShimmer";
 import { Reveal } from "@/components/Reveal";
 
 /** Display label → Google Maps search (Planet Cafe in that town). */
@@ -60,7 +60,7 @@ export function DiscoverSection() {
           delay={0.05}
           className="relative order-2 flex min-h-[220px] w-full items-center justify-center overflow-hidden rounded-xl bg-offwhite sm:min-h-[280px] md:order-none md:col-start-1 md:row-start-1 md:min-h-[min(52vh,420px)]"
         >
-          <Image
+          <ImageWithShimmer
             src="/exterior.webp"
             alt="Planet Cafe exterior"
             width={1200}

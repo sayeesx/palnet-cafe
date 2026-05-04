@@ -1,16 +1,17 @@
-import Image from "next/image";
 import Link from "next/link";
+import { ImageWithShimmer } from "@/components/ImageWithShimmer";
 import { Reveal } from "@/components/Reveal";
 
 const IMG = {
   mustTry:
-    "https://res.cloudinary.com/dhh2nd2bg/image/upload/v1777783510/Screenshot_20260503_100949_Instagram_uepeng.png",
+    "https://res.cloudinary.com/dhh2nd2bg/image/upload/f_auto,q_auto:eco,w_400,c_limit/v1777783510/Screenshot_20260503_100949_Instagram_uepeng.webp",
   favouriteDessert:
-    "https://res.cloudinary.com/dhh2nd2bg/image/upload/v1777747115/1777744203283_fd0nsa.png",
+    "https://res.cloudinary.com/dhh2nd2bg/image/upload/f_auto,q_auto:eco,w_400,c_limit/v1777747115/1777744203283_fd0nsa.webp",
   tryItNow:
-    "https://res.cloudinary.com/dhh2nd2bg/image/upload/v1777784908/hand_1_wqfhxi.png",
+    "https://res.cloudinary.com/dhh2nd2bg/image/upload/f_auto,q_auto:eco,w_400/v1777784908/hand_1_wqfhxi.webp",
+  /** Lighter delivery + capped dimensions so the hero decodes faster with less CLS */
   mexicanJackSalad:
-    "https://res.cloudinary.com/dhh2nd2bg/image/upload/v1777800444/hand_2_1_mryjwa.webp",
+    "https://res.cloudinary.com/dhh2nd2bg/image/upload/f_auto,q_auto:eco,w_960,c_limit/v1777800444/hand_2_1_mryjwa.webp",
 };
 
 function ArrowCircle() {
@@ -96,10 +97,13 @@ export function HeroSection() {
                 </p>
               </div>
               <div className="relative h-full w-[45%]">
-                <Image
+                <ImageWithShimmer
                   src={IMG.mustTry}
                   alt="Must try dish"
                   fill
+                  priority
+                  loading="eager"
+                  fetchPriority="high"
                   className="object-contain object-right"
                   sizes="(min-width: 768px) 148px, 124px"
                 />
@@ -115,10 +119,13 @@ export function HeroSection() {
                 </p>
               </div>
               <div className="relative h-full w-[45%]">
-                <Image
+                <ImageWithShimmer
                   src={IMG.favouriteDessert}
                   alt="Special dish"
                   fill
+                  priority
+                  loading="eager"
+                  fetchPriority="high"
                   className="object-contain object-right"
                   sizes="(min-width: 768px) 148px, 124px"
                 />
@@ -129,42 +136,52 @@ export function HeroSection() {
 
         {/* Right Column */}
         <Reveal delay={0.06} className="flex min-h-0 min-w-0 w-full flex-col gap-4 md:basis-0 md:flex-1 lg:max-w-none">
-          {/* Hummus Crunch Salad */}
-          <div className="relative flex min-h-[260px] flex-col overflow-hidden rounded-2xl bg-[#e4efc8] px-4 pt-4 pb-4 sm:min-h-[296px] md:min-h-[380px] md:flex-row md:items-stretch md:gap-5 md:px-6 md:pt-6 md:pb-0 lg:min-h-[420px]">
+          {/* Mexican Jack Salad — stable column heights (no flex-1 on copy) so the image decode cannot resize the card */}
+          <div className="relative flex aspect-[1/1] min-h-[180px] flex-col overflow-hidden rounded-2xl bg-[#e4efc8] px-4 pt-4 pb-4 max-md:overflow-visible max-md:pt-3 max-md:pb-3 sm:min-h-[240px] md:aspect-auto md:min-h-[400px] md:flex-row md:items-stretch md:gap-5 md:overflow-hidden md:px-6 md:pt-6 md:pb-0 lg:min-h-[420px]">
             <Link
               href="/menu"
               className="absolute right-3 top-3 z-10 rounded-full border border-olive/15 bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-olive shadow-sm hover:bg-white/95 sm:right-4 sm:top-4 sm:px-3.5 sm:py-1.5 sm:text-[11px] md:right-5 md:top-5 md:text-[12px]"
             >
               Special
             </Link>
-            <div className="mt-4 flex flex-1 flex-col justify-start pr-0 md:mt-0 md:max-w-[48%] md:justify-start md:self-start md:pr-2 lg:max-w-[45%]">
+            <div className="relative z-[1] mt-4 flex shrink-0 flex-col justify-start pr-0 max-md:mt-3 md:mt-0 md:max-w-[48%] md:justify-start md:self-start md:pr-2 lg:max-w-[45%]">
               <h2 className="text-[31px] font-bold uppercase leading-[0.95] text-olive">
                 Mexican Jack Salad
               </h2>
               <p className="mt-2 text-[11px] font-semibold text-olive/85 sm:text-xs">
                 ★ 5.0 (1k reviews)
               </p>
-              <p className="mt-2 max-w-[140px] text-[11px] leading-snug text-olive/90 sm:max-w-prose sm:text-xs">
+              <p className="mt-3 max-w-[140px] text-[11px] leading-snug text-olive/90 sm:mt-4 sm:max-w-prose sm:text-xs">
                 Fresh,<br className="sm:hidden" /> and boldly layered.<br className="sm:hidden" /> Our Mexican Jack<br className="sm:hidden" /> Salad—a vibrant<br className="sm:hidden" /> crunch of texture<br className="sm:hidden" /> and flavor.
               </p>
             </div>
-            <div className="relative ml-auto -mt-40 -mr-4 h-[220px] w-[200px] shrink-0 rounded-2xl sm:mt-0 sm:h-[270px] sm:w-[240px] md:mx-0 md:mb-0 md:ml-auto md:mr-0 md:mt-0 md:aspect-auto md:h-full md:min-h-[260px] md:max-h-none md:max-w-[min(58%,400px)] md:w-[58%] md:translate-x-4 md:self-stretch md:rounded-xl lg:max-w-[min(60%,440px)] lg:w-[60%] lg:translate-x-7 xl:translate-x-10">
-              {/* Mobile: unchanged layout */}
-              <img
-                src={IMG.mexicanJackSalad}
-                alt="Mexican Jack Salad bowl"
-                className="absolute inset-0 h-full w-full max-md:translate-y-5 object-contain object-[100%_100%] md:hidden"
-                loading="lazy"
-              />
-              {/* Desktop: pin visual to the right edge of the card (horizontal only) */}
-              <div className="hidden md:absolute md:inset-0 md:block">
-                <Image
-                  src={IMG.mexicanJackSalad}
-                  alt="Mexican Jack Salad bowl"
-                  fill
-                  className="object-contain object-right object-bottom"
-                  sizes="(min-width: 1024px) 400px, (min-width: 768px) 340px, 236px"
-                />
+            {/* Fixed-size media column so layout does not depend on image decode */}
+            <div className="relative z-0 mx-auto mt-2 min-h-0 w-full max-w-[min(100%,300px)] shrink-0 overflow-visible rounded-2xl max-md:mb-0 max-md:mt-2 max-md:max-w-[min(100%,272px)] max-md:translate-x-2 sm:mt-3 sm:max-w-[min(100%,320px)] md:mx-0 md:ml-auto md:mr-0 md:mt-0 md:mb-0 md:h-full md:min-h-[280px] md:w-[58%] md:max-w-[min(58%,400px)] md:flex-shrink-0 md:-translate-x-2 md:translate-y-3 md:self-stretch md:overflow-visible md:rounded-xl lg:max-w-[min(60%,440px)] lg:w-[60%] lg:translate-x-1 lg:translate-y-4 xl:translate-x-3 xl:translate-y-4">
+              <div className="relative w-full max-md:aspect-[5/4] md:h-full">
+                <div className="absolute inset-0 md:hidden">
+                  <ImageWithShimmer
+                    src={IMG.mexicanJackSalad}
+                    alt="Mexican Jack Salad bowl"
+                    fill
+                    priority
+                    loading="eager"
+                    fetchPriority="high"
+                    className="object-contain object-right max-md:translate-x-12 max-md:-translate-y-4 sm:max-md:translate-x-14 sm:max-md:-translate-y-5"
+                    sizes="(max-width: 767px) 280px, 240px"
+                  />
+                </div>
+                <div className="hidden md:absolute md:inset-0 md:block">
+                  <ImageWithShimmer
+                    src={IMG.mexicanJackSalad}
+                    alt="Mexican Jack Salad bowl"
+                    fill
+                    priority
+                    loading="eager"
+                    fetchPriority="high"
+                    className="object-contain object-right object-bottom md:-translate-x-4 md:translate-y-2 lg:-translate-x-6 lg:translate-y-3 xl:-translate-x-8"
+                    sizes="(min-width: 1024px) 400px, (min-width: 768px) 340px, 236px"
+                  />
+                </div>
               </div>
             </div>
           </div>

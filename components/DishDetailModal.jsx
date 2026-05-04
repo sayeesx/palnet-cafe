@@ -1,15 +1,18 @@
 "use client";
 
-import Image from "next/image";
+import { ImageWithShimmer } from "@/components/ImageWithShimmer";
+import { useLenis } from "@/components/SmoothScroll";
 import { useEffect, useRef } from "react";
 
 export function DishDetailModal({ dish, onClose }) {
   const closeRef = useRef(null);
+  const lenisRef = useLenis();
 
   useEffect(() => {
     if (!dish) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    lenisRef.current?.stop();
     closeRef.current?.focus();
     const onKey = (e) => {
       if (e.key === "Escape") onClose();
@@ -17,9 +20,10 @@ export function DishDetailModal({ dish, onClose }) {
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = prev;
+      lenisRef.current?.start();
       window.removeEventListener("keydown", onKey);
     };
-  }, [dish, onClose]);
+  }, [dish, onClose, lenisRef]);
 
   if (!dish) return null;
 
@@ -38,11 +42,23 @@ export function DishDetailModal({ dish, onClose }) {
       />
       {/* Single scroll column: image + copy stay uncropped; scrollbar hidden */}
       <div
-        className="scrollbar-none relative z-10 mx-auto flex max-h-[min(90dvh,720px)] w-full max-w-[min(100%,22rem)] flex-col overflow-y-auto overscroll-y-contain rounded-t-3xl bg-white shadow-2xl sm:max-h-[min(88vh,760px)] sm:max-w-md sm:rounded-3xl md:max-h-[min(90vh,820px)] md:max-w-lg"
+        className="scrollbar-none relative z-10 mx-auto flex max-h-[min(90dvh,720px)] w-full max-w-[min(100%,22rem)] flex-col overflow-hidden rounded-t-3xl bg-white shadow-2xl sm:max-h-[min(88vh,760px)] sm:max-w-md sm:rounded-3xl md:max-w-5xl md:flex-row md:overflow-visible"
       >
-        <div className="relative shrink-0 bg-offwhite px-3 pb-4 pt-12 sm:px-5 sm:pb-5 sm:pt-16 md:px-6 md:pb-6 md:pt-[4.25rem]">
-          <div className="relative mx-auto aspect-square w-full max-w-[17.5rem] sm:max-w-sm md:aspect-[4/3] md:max-h-[min(52vh,480px)] md:max-w-md md:min-h-[280px]">
-            <Image
+        <button
+          ref={closeRef}
+          type="button"
+          onClick={onClose}
+          className="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-olive shadow-md ring-1 ring-olive/10 transition hover:bg-white md:right-4 md:top-4"
+          aria-label="Close"
+        >
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
+          </svg>
+        </button>
+        <div className="relative shrink-0 bg-offwhite px-3 pb-4 pt-12 sm:px-5 sm:pb-5 sm:pt-16 md:shrink-0 md:basis-[45%] md:px-5 md:py-5 md:pt-5">
+          <div className="relative mx-auto aspect-square w-full max-w-[17.5rem] sm:max-w-sm md:max-w-full">
+            <ImageWithShimmer
+              key={dish.slug}
               src={dish.imageSrc}
               alt={dish.imageAlt}
               fill
@@ -51,20 +67,9 @@ export function DishDetailModal({ dish, onClose }) {
               priority
             />
           </div>
-          <button
-            ref={closeRef}
-            type="button"
-            onClick={onClose}
-            className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-olive shadow-md ring-1 ring-olive/10 transition hover:bg-white md:right-4 md:top-4"
-            aria-label="Close"
-          >
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
-            </svg>
-          </button>
           {dish.isVeg !== undefined && (
             <span
-              className={`absolute left-3 top-3 flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide shadow-sm ring-1 md:left-4 md:top-4 ${
+              className={`absolute left-3 top-3 flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide shadow-sm ring-1 md:left-5 md:top-5 ${
                 dish.isVeg
                   ? "bg-white/95 text-green-700 ring-green-600/25"
                   : "bg-white/95 text-red ring-red/30"
@@ -81,21 +86,18 @@ export function DishDetailModal({ dish, onClose }) {
           )}
         </div>
 
-        <div className="shrink-0 border-t border-olive/10 px-4 pb-6 pt-4 sm:px-6 sm:pb-7 sm:pt-5 md:px-7 md:pb-8">
+        <div className="border-t border-olive/10 px-4 pb-6 pt-4 sm:px-6 sm:pb-7 sm:pt-5 md:shrink-0 md:basis-[55%] md:border-0 md:px-8 md:py-8 md:pt-8">
           <div className="flex flex-col gap-3">
-            <div className="flex flex-wrap items-start justify-between gap-2">
-              <div className="min-w-0 flex-1">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-olive/55">
-                  {dish.category}
-                </p>
-                <h2
-                  id="dish-modal-title"
-                  className="mt-1 text-lg font-bold uppercase leading-tight text-olive sm:text-xl md:text-2xl"
-                >
-                  {dish.name}
-                </h2>
-              </div>
-              <p className="shrink-0 text-base font-bold text-olive sm:text-lg md:text-xl">{dish.price}</p>
+            <div className="flex flex-col gap-1">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-olive/55">
+                {dish.category}
+              </p>
+              <h2
+                id="dish-modal-title"
+                className="text-lg font-bold uppercase leading-tight text-olive sm:text-xl md:text-2xl"
+              >
+                {dish.name}
+              </h2>
             </div>
 
             {dish.rating && (

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-[100dvh] flex-col items-center justify-center gap-4 bg-offwhite px-4 text-center text-olive">
+    <div className="flex min-h-[50vh] flex-1 flex-col items-center justify-center gap-4 px-4 py-16 text-center text-olive">
       <h1 className="text-2xl font-bold uppercase">Page not found</h1>
       <p className="max-w-md text-sm text-olive/80">
         That link doesn&apos;t exist. Head back to Planet Cafe Bistro.

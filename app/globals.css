@@ -42,3 +42,55 @@ html::-webkit-scrollbar {
     }
   }
 }
+
+/* Image skeleton shimmer + route progress (see NavigationProgress.jsx) */
+@keyframes planet-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+@keyframes planet-nav-progress {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}
+
+.shimmer-overlay {
+  position: absolute;
+  inset: 0;
+  width: 55%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
+  animation: planet-shimmer 1.35s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-overlay {
+    animation: none;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.nav-progress-indeterminate {
+  animation: planet-nav-progress 0.95s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-progress-indeterminate {
+    animation: none;
+    width: 100%;
+    transform: none;
+  }
+}

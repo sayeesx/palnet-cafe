@@ -44,12 +44,21 @@ function CloseIcon({ className }) {
   );
 }
 
-function navLinkClass(active) {
+/** Desktop: text-style nav (aligned row, no pill buttons). */
+function desktopNavLinkClass(active) {
   return [
-    "inline-flex items-center justify-center rounded-full px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.12em] transition sm:px-5 sm:text-xs",
+    "relative whitespace-nowrap py-2 text-sm font-semibold tracking-tight transition-colors",
     active
-      ? "bg-olive text-white shadow-sm"
-      : "border border-olive/15 bg-white text-olive hover:border-olive/30 hover:bg-offwhite",
+      ? "text-olive after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:rounded-full after:bg-olive"
+      : "text-olive/65 hover:text-olive",
+  ].join(" ");
+}
+
+/** Mobile drawer: full-width rows, left-aligned (no round pill buttons). */
+function mobileNavLinkClass(active) {
+  return [
+    "block w-full rounded-lg px-1 py-3 text-left text-[15px] font-semibold tracking-tight transition-colors sm:py-3.5 sm:text-base",
+    active ? "bg-olive/[0.08] text-olive" : "text-olive/80 active:bg-olive/[0.06]",
   ].join(" ");
 }
 
@@ -67,10 +76,11 @@ export function Header() {
 
   return (
     <header className="relative z-50 w-full py-2">
-      <div className="flex min-h-[52px] w-full items-center justify-between gap-3 rounded-2xl border border-olive/10 bg-white px-3 py-2 shadow-sm sm:min-h-[56px] sm:gap-4 sm:px-5 md:min-h-[72px] md:py-2.5 md:px-6">
+      <div className="flex min-h-[52px] w-full items-center justify-between gap-3 rounded-2xl border border-olive/10 bg-white px-3 py-2 shadow-sm sm:min-h-[56px] sm:gap-4 sm:px-5 md:min-h-[64px] md:items-center md:py-2 md:px-6">
         {/* Logo */}
         <Link
           href="/"
+          prefetch
           className="flex min-w-0 items-center gap-2.5 sm:gap-3"
         >
           <Image
@@ -91,37 +101,29 @@ export function Header() {
           </span>
         </Link>
 
-        {/* Desktop Nav — two rows: Home + Menu, then Contact */}
-        <nav
-          className="hidden flex-col items-end gap-1.5 md:flex"
-          aria-label="Primary"
-        >
-          <ul className="flex list-none flex-col items-end gap-1.5 p-0">
-            <li className="flex flex-wrap justify-end gap-2">
-              {NAV.slice(0, 2).map((item) => {
-                const isPath =
-                  item.href === "/"
-                    ? pathname === "/"
-                    : item.href === "/menu"
-                      ? pathname === "/menu"
-                      : false;
-                return (
+        {/* Desktop Nav — single horizontal row, baseline-aligned */}
+        <nav className="hidden md:block" aria-label="Primary">
+          <ul className="m-0 flex list-none items-center gap-8 p-0 lg:gap-10">
+            {NAV.map((item) => {
+              const isPath =
+                item.href === "/"
+                  ? pathname === "/"
+                  : item.href === "/menu"
+                    ? pathname === "/menu"
+                    : false;
+              return (
+                <li key={item.href}>
                   <Link
-                    key={item.href}
                     href={item.href}
-                    className={navLinkClass(isPath)}
+                    prefetch
+                    className={desktopNavLinkClass(isPath)}
                     aria-current={isPath ? "page" : undefined}
                   >
                     {item.label}
                   </Link>
-                );
-              })}
-            </li>
-            <li className="flex justify-end">
-              <Link href={NAV[2].href} className={navLinkClass(false)}>
-                {NAV[2].label}
-              </Link>
-            </li>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
@@ -129,11 +131,7 @@ export function Header() {
         <button
           type="button"
           className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-olive/20 text-olive transition-transform duration-300 md:hidden"
-          style={{
-            transitionTimingFunction: reduceMotion
-              ? undefined
-              : "cubic-bezier(0.34, 1.45, 0.64, 1)",
-          }}
+          style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.45, 0.64, 1)" }}
           onClick={() => setMobileOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -171,54 +169,39 @@ export function Header() {
           >
             <nav
               aria-label="Mobile Primary"
-              className="rounded-2xl border border-olive/10 bg-white/95 p-4 shadow-lg shadow-olive/10 ring-1 ring-olive/[0.06] backdrop-blur-md"
+              className="rounded-2xl border border-olive/10 bg-white/95 px-2 py-1 shadow-lg shadow-olive/10 ring-1 ring-olive/[0.06] backdrop-blur-md sm:px-3"
             >
-              <ul className="flex list-none flex-col gap-2 p-0">
-                <motion.li
-                  className="flex gap-2"
-                  initial={reduceMotion ? false : { opacity: 0, x: -10, y: 4 }}
-                  animate={{ opacity: 1, x: 0, y: 0 }}
-                  transition={
-                    reduceMotion
-                      ? { duration: 0 }
-                      : { ...mobileDrawerSpring, delay: 0.04 }
-                  }
-                >
-                  {NAV.slice(0, 2).map((item) => {
-                    const isPath =
-                      item.href === "/"
-                        ? pathname === "/"
-                        : pathname === "/menu";
-                    return (
+              <ul className="m-0 flex list-none flex-col divide-y divide-olive/10 p-0">
+                {NAV.map((item, idx) => {
+                  const isPath =
+                    item.href === "/"
+                      ? pathname === "/"
+                      : item.href === "/menu"
+                        ? pathname === "/menu"
+                        : false;
+                  return (
+                    <motion.li
+                      key={item.href}
+                      initial={reduceMotion ? false : { opacity: 0, x: -8, y: 4 }}
+                      animate={{ opacity: 1, x: 0, y: 0 }}
+                      transition={
+                        reduceMotion
+                          ? { duration: 0 }
+                          : { ...mobileDrawerSpring, delay: 0.04 + idx * 0.05 }
+                      }
+                    >
                       <Link
-                        key={item.href}
                         href={item.href}
+                        prefetch
                         onClick={() => setMobileOpen(false)}
-                        className={`${navLinkClass(isPath)} min-w-0 flex-1 text-center`}
+                        className={mobileNavLinkClass(isPath)}
                         aria-current={isPath ? "page" : undefined}
                       >
                         {item.label}
                       </Link>
-                    );
-                  })}
-                </motion.li>
-                <motion.li
-                  initial={reduceMotion ? false : { opacity: 0, x: -10, y: 4 }}
-                  animate={{ opacity: 1, x: 0, y: 0 }}
-                  transition={
-                    reduceMotion
-                      ? { duration: 0 }
-                      : { ...mobileDrawerSpring, delay: 0.1 }
-                  }
-                >
-                  <Link
-                    href={NAV[2].href}
-                    onClick={() => setMobileOpen(false)}
-                    className={`${navLinkClass(false)} block w-full text-center`}
-                  >
-                    {NAV[2].label}
-                  </Link>
-                </motion.li>
+                    </motion.li>
+                  );
+                })}
               </ul>
             </nav>
           </motion.div>
